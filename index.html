@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SOCIAL MEDIA BOOSTER � Digital Storefront</title>
+  <title>SOCIAL MEDIA BOOSTER — Digital Storefront</title>
   <style>
     :root{--accent:#0b84ff;--muted:#666}
     body{font-family:Inter,system-ui,Arial;margin:0;background:#f6f8fb;color:#111}
@@ -20,46 +20,28 @@
     footer{padding:1rem;text-align:center;color:#666}
     .modal-bg{position:fixed;inset:0;background:rgba(10,10,20,0.45);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .15s}
     .modal{background:white;padding:18px;border-radius:12px;max-width:420px;width:92%}
-    #qrContainer {
-  display: flex;
-  justify-content: center;   /* Center horizontally */
-  align-items: center;       /* Center vertically (if taller) */
-  margin: 15px 0;
-  min-height: 240px;         /* Prevent jumping while QR loads */
-}
-#qrContainer canvas, 
-#qrContainer img {
-  margin: 0 auto;            /* Ensure QR stays centered */
-  display: block;
-}
-
-
-.row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-end; /* Pushes Paid button to right */
-  width: 100%;               /* Row takes full width */
-}
+    #qrContainer{display:flex;justify-content:center;align-items:center;margin:15px 0;min-height:240px}
+    #qrContainer canvas,#qrContainer img{margin:0 auto;display:block}
+    .row{display:flex;gap:8px;align-items:center;justify-content:flex-end;width:100%}
     .input{flex:1;padding:8px;border-radius:8px;border:1px solid #ddd}
     .close{background:transparent;border:0;color:#666;cursor:pointer}
     .download-link{display:inline-block;margin-top:8px;color:var(--accent);text-decoration:none;font-weight:600}
     .status{margin-top:8px;color:#a33;font-size:0.95rem}
     #confirmation p{margin:6px 0}
-    #qrText {text-align:center; margin-bottom:10px; color:#333; font-weight:500;}
-    #paidButton {margin-top:12px;}
+    #qrText{text-align:center;margin-bottom:10px;color:#333;font-weight:500;}
+    #paidButton{margin-top:12px;}
   </style>
 </head>
 <body>
   <header>
     <div class="logo">SOCIAL MEDIA <span style="color:#222;font-weight:600">BOOSTER</span></div>
-    <nav class="muted">Instagram � YouTube � Facebook</nav>
+    <nav class="muted">Instagram • YouTube • Facebook</nav>
   </header>
 
   <main class="container">
     <div class="notice">
-      <strong>Important � legal & safety notice:</strong>
-      <div class="muted">?? fill the correct username or link at the moment </div>
+      <strong>Important — legal & safety notice:</strong>
+      <div class="muted">₹ Please fill the correct username or link at the time of purchase</div>
     </div>
 
     <section>
@@ -78,7 +60,7 @@
     <div class="modal">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <strong id="modalTitle">Pay</strong>
-        <button class="close" onclick="closeModal()">?</button>
+        <button class="close" onclick="closeModal()">×</button>
       </div>
 
       <!-- Dynamic text lines -->
@@ -92,7 +74,7 @@
 
       <div id="qrContainer">
         <div id="qrcode" style="width:220px; margin:10px auto;"></div>
-        <a id="downloadQR" class="download-link" href="#" download style="display:none">? Download QR</a>
+        <a id="downloadQR" class="download-link" href="#" download style="display:none">₹ Download QR</a>
       </div>
 
       <div id="confirmation" style="display:none; text-align:center; margin-top:20px;">
@@ -106,7 +88,7 @@
     </div>
   </div>
 
-  <footer>Made by  � MR TARUN</footer>
+  <footer>Made by — MR TARUN</footer>
 
   <script>
     async function loadScript(url, timeout = 8000) {
@@ -137,16 +119,14 @@
       return !!window.QRCode;
     }
 
-    // Services (instead of APKs)
     const products = [
       {id:'instafollowers', name:'1k Instagram Followers', price:15, desc:'1k followers instantly'},
-      {id:'insta  followers', name:'10k Instagram Folowers', price:149, desc:'10k followers instantly'},
-	  {id:'fbFollowers', name:'1k Facebook Followers', price:15, desc:'Increase your Facebook followers instantly'},
-      {id:'fbF ollowers', name:'10k Facebook Followers', price:149, desc:'Increase your Facebook followers instantly'},
-      {id:'ytSubscribers', name:'1000 YouTube Subscribers', price:80, desc:'Boost your YouTube channel with real-looking subscribers'},
-	   {id:'yt  Subscribers', name:'YouTube Monitization', price:1199, desc:'monitize chanel in 24hrs with 1k subacribers'},
-      {id:'ytViews', name:'YouTube Views', price:149, desc:'Get 10,000+ YouTube video views fast'},
-      
+      {id:'insta10k', name:'10k Instagram Followers', price:149, desc:'10k followers instantly'},
+      {id:'fbFollowers', name:'1k Facebook Followers', price:20, desc:'Increase your Facebook followers instantly'},
+      {id:'fb10k', name:'10k Facebook Followers', price:199, desc:'Increase your Facebook followers instantly'},
+      {id:'ytSubscribers', name:'1000 YouTube Subscribers', price:49, desc:'Boost your YouTube channel with real-looking subscribers'},
+      {id:'ytMonetization', name:'YouTube Monetization', price:1199, desc:'Monetize channel in 24hrs with 1k subscribers'},
+      {id:'ytViews', name:'YouTube Views', price:300, desc:'Get 10,000+ YouTube video views fast'},
     ];
 
     const prodEl=document.getElementById('products');
@@ -155,7 +135,7 @@
       card.innerHTML=`
         <h3>${p.name}</h3>
         <div class="muted">${p.desc}</div>
-        <div class='price'>?${p.price}</div>
+        <div class='price'>₹${p.price}</div>
         <div style='margin-top:10px;display:flex;gap:8px'>
           <button class='btn' onclick="addToCart('${p.id}')">Add to Cart</button>
           <button class='btn' onclick="buyNow('${p.id}')">Buy Now</button>
@@ -171,14 +151,14 @@
       let html=''; let total=0;
       cart.forEach(item=>{
         html+=`<div style="display:flex;justify-content:space-between;margin-bottom:6px">
-                 <div>${item.name} � ${item.qty}</div>
-                 <div>?${item.qty*item.price}</div>
+                 <div>${item.name} × ${item.qty}</div>
+                 <div>₹${item.qty*item.price}</div>
                </div>`;
         total+=item.qty*item.price
       });
       html+=`<hr style='margin:8px 0'/>
              <div style='display:flex;justify-content:space-between;font-weight:700'>
-               <div>Total</div><div>?${total}</div>
+               <div>Total</div><div>₹${total}</div>
              </div>
              <div style='margin-top:10px'><button class='btn' onclick='checkout()'>Checkout</button></div>`;
       cartEl.innerHTML=html;
@@ -211,14 +191,17 @@
     const paidButton=document.getElementById('openUpi');
     const paidRow=document.getElementById('paidButtonRow');
     const defaultUpi='pranksainiapks@fam';
+    const webAppURL="https://script.google.com/macros/s/AKfycbx1NN0dzMFAiQ67Ntt7v5EW017JMsfnFXD8tzE4_X5LCYSo1NNm6nrOff7UZ88USAVLAQ/exec";
     let currentPaymentTitle='Payment';
+    let currentAmount=0;
 
     function openModal(amount,title){
       currentPaymentTitle = title || 'Payment';
-      modalTitle.textContent = currentPaymentTitle + ' � Pay ?' + amount;
+      currentAmount=amount;
+      modalTitle.textContent = currentPaymentTitle + ' — Pay ₹' + amount;
 
       qrText.innerHTML = `
-        Scan the QR code below to pay ?${amount} for ${currentPaymentTitle}.<br>
+        Scan the QR code below to pay ₹${amount} for ${currentPaymentTitle}.<br>
         After completing the payment, click the Paid button below.
       `;
 
@@ -268,11 +251,29 @@
       paidButton.onclick = () => {
         const userValue = document.getElementById('userInput').value.trim();
         if(!userValue){
-          alert('?? Please enter your Username or Link before proceeding.');
+          alert('₹ Please enter your Username or Link before proceeding.');
           return;
         }
 
-        window.location.href = upiLink;
+        // Save to Google Sheets
+        const postData = {
+          service: currentPaymentTitle,
+          username: userValue,
+          amount: currentAmount
+        };
+
+        fetch(webAppURL, {
+          method: "POST",
+          body: JSON.stringify(postData),
+          headers: { "Content-Type": "application/json" }
+        })
+        .then(res => res.text())
+        .then(responseText => {
+          console.log("Saved to Sheet:", responseText);
+        })
+        .catch(err => {
+          console.error("Error saving to Sheet:", err);
+        });
 
         qrContainer.style.display = 'none';
         paidRow.style.display = 'none';
@@ -281,11 +282,11 @@
 
         confirmation.style.display = 'block';
         confirmation.innerHTML = `
-          <p>? Our system will check the payment.</p>
+          <p>✅ Your payment request has been submitted.</p>
           <p><strong>Service:</strong> ${currentPaymentTitle}</p>
           <p><strong>Username/Link:</strong> ${userValue}</p>
-          <p>SERVICE WILL PROVIDED SOONS:</p>
-          <a href="" target="_blank" style="color:#0b84ff; font-weight:bold;">SSM BOOSTER</a>
+          <p>💾 Saved in our system. Your service will be provided shortly.</p>
+          <a href="https://yourwebsite.com" target="_blank" style="color:#0b84ff; font-weight:bold;">SSM BOOSTER</a>
         `;
       };
     }
