@@ -1,299 +1,400 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SOCIAL MEDIA BOOSTER — Digital Storefront</title>
-  <style>
-    :root{--accent:#0b84ff;--muted:#666}
-    body{font-family:Inter,system-ui,Arial;margin:0;background:#f6f8fb;color:#111}
-    header{background:white;padding:1rem 1.25rem;box-shadow:0 2px 6px rgba(20,20,40,0.06);display:flex;align-items:center;justify-content:space-between}
-    .logo{font-weight:700;color:var(--accent)}
-    .container{max-width:1000px;margin:2rem auto;padding:0 1rem}
-    .notice{background:#fff3cd;border:1px solid #ffe8a1;padding:12px;margin-bottom:16px;border-radius:8px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:white;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(18,24,40,0.04)}
-    .card h3{margin:0 0 6px 0}
-    .price{font-weight:700;margin-top:8px}
-    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
-    .muted{color:var(--muted);font-size:0.95rem}
-    footer{padding:1rem;text-align:center;color:#666}
-    .modal-bg{position:fixed;inset:0;background:rgba(10,10,20,0.45);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .15s}
-    .modal{background:white;padding:18px;border-radius:12px;max-width:420px;width:92%}
-    #qrContainer{display:flex;justify-content:center;align-items:center;margin:15px 0;min-height:240px}
-    #qrContainer canvas,#qrContainer img{margin:0 auto;display:block}
-    .row{display:flex;gap:8px;align-items:center;justify-content:flex-end;width:100%}
-    .input{flex:1;padding:8px;border-radius:8px;border:1px solid #ddd}
-    .close{background:transparent;border:0;color:#666;cursor:pointer}
-    .download-link{display:inline-block;margin-top:8px;color:var(--accent);text-decoration:none;font-weight:600}
-    .status{margin-top:8px;color:#a33;font-size:0.95rem}
-    #confirmation p{margin:6px 0}
-    #qrText{text-align:center;margin-bottom:10px;color:#333;font-weight:500;}
-    #paidButton{margin-top:12px;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOCIAL MEDIA BOOSTER — Digital Storefront</title>
+    <style>
+        :root {
+            --accent: #0b84ff;
+            --muted: #666;
+            --instagram: #E1306C;
+            --youtube: #FF0000;
+            --facebook: #4267B2;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, Arial, sans-serif;
+            margin: 0;
+            background: #f6f8fb;
+            color: #111;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: white;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 2px 6px rgba(20, 20, 40, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .notice {
+            background: #fff3cd;
+            border: 1px solid #ffe8a1;
+            padding: 12px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        
+        .platform-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 6px 18px rgba(18, 24, 40, 0.04);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .platform-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .instagram-title { color: var(--instagram); }
+        .youtube-title { color: var(--youtube); }
+        .facebook-title { color: var(--facebook); }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: #f9fafc;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(18, 24, 40, 0.08);
+        }
+        
+        .card h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.2rem;
+            color: #222;
+        }
+        
+        .price {
+            font-weight: 700;
+            margin: 12px 0;
+            color: #0b84ff;
+            font-size: 1.3rem;
+        }
+        
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #0a73e0;
+        }
+        
+        .muted {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        footer {
+            padding: 1.5rem;
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            background: white;
+            box-shadow: 0 -2px 6px rgba(20, 20, 40, 0.06);
+        }
+        
+        .cart-section {
+            margin-top: 40px;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(18, 24, 40, 0.04);
+        }
+        
+        .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        #cart {
+            padding: 20px;
+            background: #f9fafc;
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .platform-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">SOCIAL MEDIA <span style="color:#222;font-weight:600">BOOSTER</span></div>
-    <nav class="muted">Instagram • YouTube • Facebook</nav>
-  </header>
+    <header>
+        <div class="logo">SOCIAL MEDIA <span style="color:#222;font-weight:600">BOOSTER</span></div>
+        <nav class="muted">Instagram • YouTube • Facebook</nav>
+    </header>
 
-  <main class="container">
-    <div class="notice">
-      <strong>Important — legal & safety notice:</strong>
-      <div class="muted">₹ Please fill the correct username or link at the time of purchase</div>
-    </div>
-
-    <section>
-      <h2>OUR SERVICES</h2>
-      <p class="muted">Boost your social media presence instantly with our premium services!</p>
-      <div class="grid" id="products"></div>
-    </section>
-
-    <section style="margin-top:18px;">
-      <h2>Your Cart</h2>
-      <div id="cart" class="card muted">Cart is empty</div>
-    </section>
-  </main>
-
-  <div class="modal-bg" id="modal">
-    <div class="modal">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong id="modalTitle">Pay</strong>
-        <button class="close" onclick="closeModal()">×</button>
-      </div>
-
-      <!-- Dynamic text lines -->
-      <div id="qrText"></div>
-
-      <!-- Username / Link input -->
-      <div id="userInputBox" style="margin:10px 0; text-align:center; display:none;">
-        <label for="userInput" style="font-weight:500; display:block; margin-bottom:6px;">Enter Link/username:</label>
-        <input type="text" id="userInput" class="input" placeholder="Paste profile link or username">
-      </div>
-
-      <div id="qrContainer">
-        <div id="qrcode" style="width:220px; margin:10px auto;"></div>
-        <a id="downloadQR" class="download-link" href="#" download style="display:none">₹ Download QR</a>
-      </div>
-
-      <div id="confirmation" style="display:none; text-align:center; margin-top:20px;">
-        <!-- Filled dynamically -->
-      </div>
-
-      <!-- Paid button row -->
-      <div class="row" id="paidButtonRow">
-        <button class="btn" id="openUpi">Paid</button>
-      </div>
-    </div>
-  </div>
-
-  <footer>Made by — MR GURU</footer>
-
-  <script>
-    async function loadScript(url, timeout = 8000) {
-      return new Promise((resolve, reject) => {
-        const s = document.createElement('script');
-        s.src = url;
-        s.async = true;
-        s.onload = () => resolve(url);
-        s.onerror = () => reject(new Error('Failed to load ' + url));
-        document.head.appendChild(s);
-        if(timeout) setTimeout(()=>reject(new Error('Timeout loading '+url)), timeout);
-      });
-    }
-
-    async function ensureQRCodeLib(){
-      if(window.QRCode) return true;
-      const cdns=[
-        'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
-        'https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js',
-        'https://unpkg.com/qrcodejs@1.0.0/qrcode.min.js'
-      ];
-      for(const url of cdns){
-        try{
-          await loadScript(url);
-          if(window.QRCode) return true;
-        }catch(e){console.warn('Could not load',url,e.message)}
-      }
-      return !!window.QRCode;
-    }
-
-    const products = [
-      {id:'instafollowers', name:'1k Instagram Followers', price:10, desc:'1k followers instantly'},
-      {id:'insta10k', name:'10k Instagram Followers', price:99, desc:'10k followers instantly'},
-	  {id:'instag10k', name:'10k Instagram Reels Veiws', price:39, desc:'10k Instagram Reels Veiws instantly'},
-      {id:'fbFollowers', name:'1k Facebook Followers', price:20, desc:'Increase your Facebook followers instantly'},
-      {id:'fb10k', name:'10k Facebook Followers', price:199, desc:'Increase your Facebook followers instantly'},
-      {id:'ytSubscribers', name:'1000 YouTube Subscribers', price:49, desc:'Boost your YouTube channel with real-looking subscribers'},
-      {id:'ytMonetization', name:'YouTube Monetization', price:1199, desc:'Monetize channel in 24hrs with 1k subscribers'},
-      {id:'ytViews', name:'YouTube Views', price:300, desc:'Get 10,000+ YouTube video views fast'},
-    ];
-
-    const prodEl=document.getElementById('products');
-    products.forEach(p=>{
-      const card=document.createElement('div'); card.className='card';
-      card.innerHTML=`
-        <h3>${p.name}</h3>
-        <div class="muted">${p.desc}</div>
-        <div class='price'>₹${p.price}</div>
-        <div style='margin-top:10px;display:flex;gap:8px'>
-          <button class='btn' onclick="addToCart('${p.id}')">Add to Cart</button>
-          <button class='btn' onclick="buyNow('${p.id}')">Buy Now</button>
+    <main class="container">
+        <div class="notice">
+            <strong>Important — legal & safety notice:</strong>
+            <div class="muted">Please fill the correct username or link at the time of purchase</div>
         </div>
-      `;
-      prodEl.appendChild(card);
-    });
 
-    let cart=[];
-    function renderCart(){
-      const cartEl=document.getElementById('cart');
-      if(cart.length===0){cartEl.innerHTML='Cart is empty';return}
-      let html=''; let total=0;
-      cart.forEach(item=>{
-        html+=`<div style="display:flex;justify-content:space-between;margin-bottom:6px">
-                 <div>${item.name} × ${item.qty}</div>
-                 <div>₹${item.qty*item.price}</div>
-               </div>`;
-        total+=item.qty*item.price
-      });
-      html+=`<hr style='margin:8px 0'/>
-             <div style='display:flex;justify-content:space-between;font-weight:700'>
-               <div>Total</div><div>₹${total}</div>
-             </div>
-             <div style='margin-top:10px'><button class='btn' onclick='checkout()'>Checkout</button></div>`;
-      cartEl.innerHTML=html;
-    }
+        <div class="services-container">
+            <!-- Instagram Services -->
+            <div class="platform-section">
+                <div class="platform-header">
+                    <h2 class="platform-title instagram-title">Instagram Services</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="card">
+                        <h3>1k Instagram Followers</h3>
+                        <div class="muted">1k followers instantly</div>
+                        <div class="price">₹10</div>
+                        <button class="btn" onclick="addToCart('instafollowers')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('instafollowers')">Buy Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>10k Instagram Followers</h3>
+                        <div class="muted">10k followers instantly</div>
+                        <div class="price">₹99</div>
+                        <button class="btn" onclick="addToCart('insta10k')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('insta10k')">Buy Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>10k Instagram Reels Views</h3>
+                        <div class="muted">10k Instagram Reels Views instantly</div>
+                        <div class="price">₹39</div>
+                        <button class="btn" onclick="addToCart('instag10k')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('instag10k')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- YouTube Services -->
+            <div class="platform-section">
+                <div class="platform-header">
+                    <h2 class="platform-title youtube-title">YouTube Services</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="card">
+                        <h3>1000 YouTube Subscribers</h3>
+                        <div class="muted">Boost your YouTube channel with real-looking subscribers</div>
+                        <div class="price">₹49</div>
+                        <button class="btn" onclick="addToCart('ytSubscribers')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('ytSubscribers')">Buy Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>YouTube Monetization</h3>
+                        <div class="muted">Monetize channel in 24hrs with 1k subscribers</div>
+                        <div class="price">₹1199</div>
+                        <button class="btn" onclick="addToCart('ytMonetization')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('ytMonetization')">Buy Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>YouTube Views</h3>
+                        <div class="muted">Get 10,000+ YouTube video views fast</div>
+                        <div class="price">₹300</div>
+                        <button class="btn" onclick="addToCart('ytViews')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('ytViews')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Facebook Services -->
+            <div class="platform-section">
+                <div class="platform-header">
+                    <h2 class="platform-title facebook-title">Facebook Services</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="card">
+                        <h3>1k Facebook Followers</h3>
+                        <div class="muted">Increase your Facebook followers instantly</div>
+                        <div class="price">₹20</div>
+                        <button class="btn" onclick="addToCart('fbFollowers')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('fbFollowers')">Buy Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>10k Facebook Followers</h3>
+                        <div class="muted">Increase your Facebook followers instantly</div>
+                        <div class="price">₹199</div>
+                        <button class="btn" onclick="addToCart('fb10k')">Add to Cart</button>
+                        <button class="btn" onclick="buyNow('fb10k')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    function addToCart(id){
-      const p=products.find(x=>x.id===id); if(!p)return;
-      const existing=cart.find(x=>x.id===id);
-      if(existing) existing.qty++; else cart.push({id:p.id,name:p.name,price:p.price,qty:1});
-      renderCart();
-    }
+        <div class="cart-section">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Cart</h2>
+            </div>
+            <div id="cart" class="muted">Cart is empty</div>
+        </div>
+    </main>
 
-    function buyNow(id){
-      const p=products.find(x=>x.id===id); if(!p)return;
-      openModal(p.price,p.name);
-    }
+    <footer>Made by — MR GURU</footer>
 
-    function checkout(){
-      if(cart.length===0)return alert('Cart is empty');
-      const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-      openModal(total,'Cart Payment');
-    }
+    <script>
+        const products = [
+            {id:'instafollowers', name:'1k Instagram Followers', price:10},
+            {id:'insta10k', name:'10k Instagram Followers', price:99},
+            {id:'instag10k', name:'10k Instagram Reels Views', price:39},
+            {id:'fbFollowers', name:'1k Facebook Followers', price:20},
+            {id:'fb10k', name:'10k Facebook Followers', price:199},
+            {id:'ytSubscribers', name:'1000 YouTube Subscribers', price:49},
+            {id:'ytMonetization', name:'YouTube Monetization', price:1199},
+            {id:'ytViews', name:'YouTube Views', price:300},
+        ];
 
-    const modal=document.getElementById('modal');
-    const modalTitle=document.getElementById('modalTitle');
-    const qrText=document.getElementById('qrText');
-    const downloadLink=document.getElementById('downloadQR');
-    const qrContainer=document.getElementById('qrContainer');
-    const confirmation=document.getElementById('confirmation');
-    const paidButton=document.getElementById('openUpi');
-    const paidRow=document.getElementById('paidButtonRow');
-    const defaultUpi='pranksainiapks@fam';
-    const webAppURL="https://script.google.com/macros/s/AKfycbx1NN0dzMFAiQ67Ntt7v5EW017JMsfnFXD8tzE4_X5LCYSo1NNm6nrOff7UZ88USAVLAQ/exec";
-    let currentPaymentTitle='Payment';
-    let currentAmount=0;
-
-    function openModal(amount,title){
-      currentPaymentTitle = title || 'Payment';
-      currentAmount=amount;
-      modalTitle.textContent = currentPaymentTitle + ' — Pay ₹' + amount;
-
-      qrText.innerHTML = `
-        Scan the QR code below to pay ₹${amount} for ${currentPaymentTitle}.<br>
-        After completing the payment, click the Paid button below.
-      `;
-
-      document.getElementById('userInputBox').style.display = 'block';
-      document.getElementById('userInput').value = '';
-
-      qrContainer.style.display = 'block';
-      paidRow.style.display = 'flex';
-      confirmation.style.display = 'none';
-
-      generateQR(amount);
-
-      modal.style.visibility = 'visible';
-      modal.style.opacity = '1';
-    }
-
-    function closeModal(){modal.style.opacity='0'; setTimeout(()=>modal.style.visibility='hidden',150)}
-
-    async function generateQR(amount){
-      const upiLink=`upi://pay?pa=${encodeURIComponent(defaultUpi)}&pn=${encodeURIComponent('SocialMediaBoost')}&am=${encodeURIComponent(amount)}&cu=INR`;
-
-      qrContainer.innerHTML='';
-      downloadLink.style.display='none';
-
-      const hasLib=await ensureQRCodeLib().catch(()=>false);
-      const cleanTitle=currentPaymentTitle.replace(/[^a-z0-9]/gi,'_');
-
-      if(hasLib&&window.QRCode){
-        new QRCode(qrContainer,{text:upiLink,width:220,height:220});
-        setTimeout(()=>{
-          const qrCanvas=qrContainer.querySelector('canvas');
-          if(qrCanvas){
-            const qrDataUrl=qrCanvas.toDataURL('image/png');
-            downloadLink.href=qrDataUrl;
-            downloadLink.download=`Boost_${cleanTitle}_qr.png`;
-            downloadLink.style.display='inline-block';
-          }
-        },180);
-      } else {
-        const qrUrl='https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='+encodeURIComponent(upiLink);
-        qrContainer.innerHTML=`<img src="${qrUrl}" width="220" height="220" alt="QR code"/>`;
-        downloadLink.href=qrUrl;
-        downloadLink.download=`Boost_${cleanTitle}_qr.png`;
-        downloadLink.style.display='inline-block';
-      }
-
-      paidButton.onclick = () => {
-        const userValue = document.getElementById('userInput').value.trim();
-        if(!userValue){
-          alert('₹ Please enter your Username or Link before proceeding.');
-          return;
+        let cart = [];
+        
+        function renderCart() {
+            const cartEl = document.getElementById('cart');
+            if (cart.length === 0) {
+                cartEl.innerHTML = 'Cart is empty';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                html += `<div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <div>${item.name} × ${item.qty}</div>
+                            <div>₹${item.qty * item.price}</div>
+                         </div>`;
+                total += item.qty * item.price;
+            });
+            
+            html += `<hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;">
+                     <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem;">
+                         <div>Total</div>
+                         <div>₹${total}</div>
+                     </div>
+                     <div style="margin-top: 20px;">
+                         <button class="btn" onclick="checkout()">Checkout</button>
+                         <button class="btn" onclick="clearCart()" style="background: #666;">Clear Cart</button>
+                     </div>`;
+            
+            cartEl.innerHTML = html;
         }
-
-        // Save to Google Sheets
-        const postData = {
-          service: currentPaymentTitle,
-          username: userValue,
-          amount: currentAmount
-        };
-
-        fetch(webAppURL, {
-          method: "POST",
-          body: JSON.stringify(postData),
-          headers: { "Content-Type": "application/json" }
-        })
-        .then(res => res.text())
-        .then(responseText => {
-          console.log("Saved to Sheet:", responseText);
-        })
-        .catch(err => {
-          console.error("Error saving to Sheet:", err);
-        });
-
-        qrContainer.style.display = 'none';
-        paidRow.style.display = 'none';
-        qrText.style.display = 'none';
-        document.getElementById('userInputBox').style.display = 'none';
-
-        confirmation.style.display = 'block';
-        confirmation.innerHTML = `
-          <p>✅ Your payment request has been submitted.</p>
-          <p><strong>Service:</strong> ${currentPaymentTitle}</p>
-          <p><strong>Username/Link:</strong> ${userValue}</p>
-          <p>💾 Saved in our system. Your service will be provided shortly.</p>
-          <a href="https://socialmediabooster12.github.io/SMB/" target="_blank" style="color:#0b84ff; font-weight:bold;">SM BOOSTER</a>
-        `;
-      };
-    }
-
-    renderCart();
-  </script>
+        
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({...product, qty: 1});
+            }
+            
+            renderCart();
+        }
+        
+        function buyNow(id) {
+            addToCart(id);
+            alert('Product added to cart. Proceed to checkout from your cart.');
+        }
+        
+        function clearCart() {
+            cart = [];
+            renderCart();
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add some products first.');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            alert(`Proceeding to checkout. Total amount: ₹${total}`);
+            // In a real application, you would redirect to a checkout page here
+        }
+        
+        // Initialize the cart display
+        renderCart();
+    </script>
 </body>
 </html>
 
